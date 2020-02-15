@@ -13,7 +13,7 @@ class App extends Component {
     this.state={
       food: foods,
       form: false,
-
+      searchString: '',
     }
   }
 
@@ -31,14 +31,22 @@ class App extends Component {
     })
   }
 
+  searchFood=(event)=>{
+    /* const value ist der in der Searchbar eingegebene Wert */
+  const {value} = event.target
+  console.log("value " +value);
+  this.setState({searchString: value});
+  }
 
   render() {
+    const filteredFood= this.state.food.filter(oneFoodItem=>oneFoodItem.name.toLowerCase().includes(this.state.searchString.toLowerCase()));
     return (
         <div className="page-view">
           <h2 className="is-size-2 has-text-weight-bold">IronNutrition</h2>
+          <input type="text"  value={this.state.searchString} placeholder="Search Food ..." onChange={this.searchFood}/> <br />
           <button onClick={this.showForm}>Add Food</button>
           {this.state.form ? <FoodForm addFood={this.addFoodHandler}/>: <p></p>}
-          {this.state.food.map((oneFood,index)=>{
+          {filteredFood.map((oneFood,index)=>{
             return (<FoodBox key={index} {...oneFood} />)
           })}
           
