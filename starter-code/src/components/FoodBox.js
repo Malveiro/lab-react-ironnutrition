@@ -3,6 +3,16 @@ import foods from '../foods.json';
 
 class FoodBox extends Component {
     
+    // constructor(props){
+    //     super(props);
+
+    //     this.state = {
+    //         name: '',
+    //         calories: '',
+    //         image: '', 
+    //     }
+    // }
+
     render(){
         console.log(foods);
 
